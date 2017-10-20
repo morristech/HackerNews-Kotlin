@@ -2,10 +2,10 @@ package com.hackernewsapp.di.modules
 
 import android.app.Application
 
-import com.hackernewsapp.discussion.data.DiscussionInteractor
-import com.hackernewsapp.discussion.data.DiscussionInteractorImpl
-import com.hackernewsapp.discussion.presenter.DiscussionPresenter
-import com.hackernewsapp.discussion.presenter.DiscussionPresenterImpl
+import com.hackernewsapp.data.DiscussionInteractor
+import com.hackernewsapp.data.DiscussionInteractorImpl
+import com.hackernewsapp.ui.discussion.presenter.DiscussionPresenter
+import com.hackernewsapp.ui.discussion.presenter.DiscussionPresenterImpl
 
 import dagger.Module
 import dagger.Provides

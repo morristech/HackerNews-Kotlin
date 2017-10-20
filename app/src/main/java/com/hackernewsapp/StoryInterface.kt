@@ -1,8 +1,8 @@
 package com.hackernewsapp
 
 
-import com.hackernewsapp.discussion.model.Discussion
-import com.hackernewsapp.story.model.Story
+import com.hackernewsapp.data.model.Discussion
+import com.hackernewsapp.data.model.Story
 import retrofit.Callback
 import retrofit.http.GET
 import retrofit.http.Path

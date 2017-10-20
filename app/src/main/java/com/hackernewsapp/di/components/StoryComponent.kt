@@ -5,10 +5,10 @@ import com.hackernewsapp.di.modules.DiscussionModule
 import com.hackernewsapp.di.modules.RetrofitModule
 import com.hackernewsapp.di.modules.StoryModule
 import com.hackernewsapp.di.scopes.UserScope
-import com.hackernewsapp.discussion.DiscussionActivity
-import com.hackernewsapp.story.MainActivity
-import com.hackernewsapp.story.data.StoryInteractor
-import com.hackernewsapp.story.presenter.StoryPresenter
+import com.hackernewsapp.ui.discussion.DiscussionActivity
+import com.hackernewsapp.ui.story.MainActivity
+import com.hackernewsapp.data.StoryInteractor
+import com.hackernewsapp.ui.story.presenter.StoryPresenter
 
 import dagger.Component
 

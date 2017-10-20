@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".story.MainActivity"
+            android:name="com.hackernewsapp.ui.story.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +22,12 @@
         </activity>
 
         <activity
-            android:name=".discussion.DiscussionActivity"
+            android:name="com.hackernewsapp.ui.discussion.DiscussionActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize"></activity>
 
         <activity
-            android:name=".discussion.WebviewActivity"
+            android:name="com.hackernewsapp.ui.discussion.WebviewActivity"
             android:theme="@style/AppTheme"
             android:configChanges="orientation|screenSize"></activity>
 

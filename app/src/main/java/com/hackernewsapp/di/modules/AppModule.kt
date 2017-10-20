@@ -1,8 +1,8 @@
 package com.hackernewsapp.di.modules
 
 import android.app.Application
-import com.hackernewsapp.story.data.StoryInteractor
-import com.hackernewsapp.story.data.StoryInteractorImpl
+import com.hackernewsapp.data.StoryInteractor
+import com.hackernewsapp.data.StoryInteractorImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
