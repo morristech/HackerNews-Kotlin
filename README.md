@@ -1,4 +1,4 @@
-# Kotlin port of the HackerNews app with more features - WIP
+## Kotlin port of the HackerNews app with more features - WIP
 A simple Hacker News (https://news.ycombinator.com) reader app using Hacker News API (https://github.com/HackerNews/API)
 
 -  Support API 9 to 25
