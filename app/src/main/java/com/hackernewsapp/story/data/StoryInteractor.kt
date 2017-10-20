@@ -1,0 +1,25 @@
+package com.hackernewsapp.story.data
+
+import com.hackernewsapp.StoryInterface
+import com.hackernewsapp.story.model.Story
+
+import rx.Observable
+
+/**
+ * @author Tosin Onikute.
+ *
+ * StoryInteractor is an interface that is implemented by the StoryInteractorImpl Data Manager
+ */
+
+interface StoryInteractor {
+
+    fun sayHello()
+
+    fun getStorys(storyInterface: StoryInterface, storyIds: List<Long>): Observable<Story>
+
+    fun subListStories(storyInterface: StoryInterface, storyIds: List<Long>): Observable<List<Story>>
+
+    fun sortStories(storyList: List<Story>, storyIds: List<Long>): List<Story>
+
+
+}

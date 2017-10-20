@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/tech6/developer-cert/HackerNewsKotlin/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/tech6/developer-cert/HackerNewsKotlin/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_7e15728d5808fefe24c1fe2de5b2987611fb32a7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/tech6/developer-cert/HackerNewsKotlin/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a6998c1b35a803eac4271ff44b4593139fd7f54d">
+        <dex dex="/Users/tech6/developer-cert/HackerNewsKotlin/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_d36691ca9ea857d3a537ea6ade6950b6fb7d4676/classes.dex" />
+    </item>
+
+</items>
