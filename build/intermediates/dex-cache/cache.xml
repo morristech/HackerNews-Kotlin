@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="9140f0d1cdbbd3c2a94ccb8169065bb47698f1be">
+        sha1="06fb450f7f7429d45defe82be9052d28fb51af9b">
         <dex dex="/Users/tech6/developer-cert/HackerNewsKotlin/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_d36691ca9ea857d3a537ea6ade6950b6fb7d4676/classes.dex" />
     </item>
 

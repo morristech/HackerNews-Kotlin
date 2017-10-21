@@ -5,7 +5,6 @@ import android.app.Application
 import com.hackernewsapp.data.DiscussionInteractor
 import com.hackernewsapp.data.DiscussionInteractorImpl
 import com.hackernewsapp.ui.discussion.presenter.DiscussionPresenter
-import com.hackernewsapp.ui.discussion.presenter.DiscussionPresenterImpl
 
 import dagger.Module
 import dagger.Provides
@@ -19,7 +18,7 @@ class DiscussionModule(private val application: Application) {
 
     @Provides
     fun getDiscussionPresenter(discussionInteractor: DiscussionInteractor): DiscussionPresenter {
-        return DiscussionPresenterImpl(application, discussionInteractor)
+        return DiscussionPresenter(application, discussionInteractor)
     }
 
     @Provides

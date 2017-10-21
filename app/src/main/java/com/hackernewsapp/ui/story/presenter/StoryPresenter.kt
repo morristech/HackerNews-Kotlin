@@ -1,23 +1,118 @@
 package com.hackernewsapp.ui.story.presenter
 
+import android.app.Application
+import com.hackernewsapp.Constants
 import com.hackernewsapp.StoryInterface
+import com.hackernewsapp.data.StoryInteractor
+import com.hackernewsapp.data.model.Story
+import com.hackernewsapp.ui.base.BasePresenter
 import com.hackernewsapp.ui.story.view.StoryView
-
+import com.hackernewsapp.util.Logger
+import rx.Observable
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
+import java.util.*
 
 /**
  * @author Tosin Onikute.
  */
 
-interface StoryPresenter {
+class StoryPresenter(private val application: Application, private val storyInteractor: StoryInteractor) : BasePresenter<StoryView>() {
 
-    fun setView(storyView: StoryView)
+    private val logger = Logger.getLogger(javaClass)
 
+    private var storyView: StoryView? = null
+
+
+    private var totalNo = 0
+    private val listStoryId = ArrayList<Long>()
+    private val listArrayList = ArrayList<Story>()
+    private val refreshedArrayList = ArrayList<Story>()
+    private var mStoryObservable: Observable<Story>? = null
+
+    override fun attachView(storyView: StoryView) {
+        super.attachView(storyView)
+    }
+
+    override fun detachView() {
+        super.detachView()
+    }
+
+    // Method for repopulating recycler view
     fun updateRecyclerView(storyInterface: StoryInterface, mCompositeSubscription: CompositeSubscription,
-                           fromIndex: Int?, toIndex: Int?)
+                                    fromIndex: Int?, toIndex: Int?) {
+
+        // Show Progress Layout
+        refreshedArrayList.clear()
+        storyView!!.setLayoutVisibility()
+
+        logger.debug(fromIndex.toString() + " " + toIndex.toString())
+        fetchStories(storyInterface, mCompositeSubscription, true, true, listStoryId.subList(fromIndex!!, toIndex!!))
+    }
+
 
     fun getStoryIds(storyInterface: StoryInterface, storyTypeUrl: String,
-                    mCompositeSubscription: CompositeSubscription, refresh: Boolean)
+                             mCompositeSubscription: CompositeSubscription, refresh: Boolean) {
+        if (refresh) {
+            listArrayList.clear()
+            refreshedArrayList.clear()
+        }
+
+        if (storyInterface != null) {
+
+            mCompositeSubscription.add(storyInterface.getStories(storyTypeUrl)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ longs ->
+                        listStoryId.clear()
+                        listStoryId.addAll(longs)
+                        totalNo = listStoryId.size
+
+                        fetchStories(storyInterface, mCompositeSubscription,
+                                true, false, listStoryId.subList(0, Constants.NO_OF_ITEMS_LOADING))
+                    }) { throwable -> logger.debug(throwable.localizedMessage) })
+
+        }
+    }
+
+
+    fun fetchStories(storyInterface: StoryInterface, mCompositeSubscription: CompositeSubscription,
+                     updateObservable: Boolean, loadmore: Boolean, list: List<Long>) {
+        if (mStoryObservable == null || updateObservable) {
+            mStoryObservable = storyInteractor.getStorys(storyInterface, list).cache()
+        }
+
+        mCompositeSubscription.add(mStoryObservable!!
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<Story>() {
+                    override fun onCompleted() {
+                        logger.debug("completed")
+
+                        if (isViewAttached) {
+                            mvpView!!.doAfterFetchStory()
+                            val storiesLoaded = listArrayList.size
+                            mvpView!!.setAdapter(storiesLoaded, listArrayList, refreshedArrayList, loadmore, totalNo)
+                        }
+
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        logger.debug(throwable.localizedMessage)
+                    }
+
+                    override fun onNext(story: Story?) {
+                        if (story != null) {
+                            listArrayList.add(story)
+                            refreshedArrayList.add(story)
+                        }
+                    }
+                }))
+
+
+    }
 
 
 }

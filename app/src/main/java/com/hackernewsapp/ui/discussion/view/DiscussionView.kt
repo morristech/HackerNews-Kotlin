@@ -3,13 +3,14 @@ package com.hackernewsapp.ui.discussion.view
 import android.view.View
 import com.hackernewsapp.data.model.Discussion
 import com.hackernewsapp.data.model.Story
+import com.hackernewsapp.ui.base.MvpView
 import java.util.*
 
 /**
  * Created by tosin on 3/13/2017.
  */
 
-interface DiscussionView {
+interface DiscussionView : MvpView {
 
     fun init()
 
@@ -18,10 +19,6 @@ interface DiscussionView {
     fun setCollapseToolbar(title: String)
 
     fun displayOfflineSnackbar()
-
-    fun setProgressBarVisible()
-
-    fun setProgressBarGone()
 
     fun sayNoComment()
 

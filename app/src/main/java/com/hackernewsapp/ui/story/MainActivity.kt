@@ -25,8 +25,6 @@ import java.util.*
 import javax.inject.Inject
 
 
-
-
 class MainActivity : BaseActivity(), StoryView {
 
     @field:[Inject]
@@ -69,7 +67,7 @@ class MainActivity : BaseActivity(), StoryView {
         setContentView(R.layout.activity_main)
 
         BaseApplication.storyComponent.inject(this)
-        storyPresenter!!.setView(this)
+        storyPresenter!!.attachView(this)
         storyLayout = findViewById(R.id.layout_story_root) as RelativeLayout
         mCompositeSubscription = CompositeSubscription()
 
@@ -101,7 +99,7 @@ class MainActivity : BaseActivity(), StoryView {
     // populate the list view by adding data to arraylist
     override fun populateRecyclerView() {
 
-        progressBar!!.visibility = View.VISIBLE
+        showLoading()
         storyPresenter!!.getStoryIds(storyInterface!!, Constants.TOP_STORIES, mCompositeSubscription!!, false)
 
     }
@@ -209,9 +207,17 @@ class MainActivity : BaseActivity(), StoryView {
 
     override fun doAfterFetchStory() {
 
-        progressBar!!.visibility = View.GONE
+        hideLoading()
         bottomLayout!!.visibility = View.GONE
         swipeContainer!!.isRefreshing = false
+    }
+
+    override fun showLoading() {
+        progressBar!!.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar!!.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

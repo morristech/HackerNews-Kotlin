@@ -78,7 +78,7 @@ class DiscussionActivity : BaseActivity(), DiscussionView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_discussion)
         BaseApplication.storyComponent.inject(this)
-        discussionPresenter!!.setView(this)
+        discussionPresenter!!.attachView(this)
 
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         toolbar.title = ""
@@ -252,16 +252,8 @@ class DiscussionActivity : BaseActivity(), DiscussionView {
         appBarLayout!!.layoutParams = CoordinatorLayout.LayoutParams(AppBarLayout.LayoutParams.MATCH_PARENT, heightDp)
     }
 
-    override fun setProgressBarVisible() {
-        progressBar!!.visibility = View.VISIBLE
-    }
-
-    override fun setProgressBarGone() {
-        progressBar!!.visibility = View.GONE
-    }
-
     override fun sayNoComment() {
-        progressBar!!.visibility = View.GONE
+        hideLoading()
         if (progressBar!!.visibility == View.GONE) {
             noComment!!.visibility = View.VISIBLE
         }
@@ -311,6 +303,14 @@ class DiscussionActivity : BaseActivity(), DiscussionView {
         val inflater = menuInflater
         inflater.inflate(R.menu.share_menu, menu)
         return true
+    }
+
+    override fun showLoading() {
+        progressBar!!.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar!!.visibility = View.GONE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
